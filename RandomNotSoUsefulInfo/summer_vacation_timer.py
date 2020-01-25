@@ -2,11 +2,11 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-from datetime import date
+from datetime import datetime
 from dash.dependencies import Input, Output
 
-summer_start_date = date(2020, 6, 25)
-days_till_summer = summer_start_date - date.today()
+summer_start_date = datetime(2020, 6, 25, 12, 00, 00)
+days_till_summer = summer_start_date - datetime.now()
 
 navbar = dbc.NavbarSimple(
      # children=[
@@ -50,8 +50,9 @@ would like to see here, you know where to find me :)\n \n Adam
                 dbc.Col(
                     [
                     html.H2("Days Till Summer vacation\n "),
-                    html.H2(str(days_till_summer.days)+ ' Days.')
+                    html.H2(str(days_till_summer).split('.')[0])
                      ]
+
                 ),
             ]
         )
