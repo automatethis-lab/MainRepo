@@ -5,9 +5,6 @@ import dash_html_components as html
 from datetime import datetime
 from dash.dependencies import Input, Output
 
-summer_start_date = datetime(2020, 6, 25, 12, 00, 00)
-days_till_summer = summer_start_date - datetime.now()
-
 navbar = dbc.NavbarSimple(
      # children=[
         # dbc.NavItem(dbc.NavLink("Link", href="#")),
@@ -49,8 +46,8 @@ would like to see here, you know where to find me :)\n \n Adam
                 ),
                 dbc.Col(
                     [
-                    html.H2("Days Till Summer vacation\n "),
-                    html.H2(str(days_till_summer).split('.')[0])
+                    html.H2("Time till Summer Vacation\n "),
+                    html.H2(id='updated-date')
                      ]
 
                 ),
@@ -63,12 +60,17 @@ would like to see here, you know where to find me :)\n \n Adam
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = html.Div([navbar, body,
-                        # dcc.Interval(id='interval-component',
-                        # interval=2000,
-                        # n_intervals=0)
+                        dcc.Interval(id='interval-component',
+                        interval=1000,
+                        n_intervals=0)
                         ])
 
-# @app.callback(Output(''))
+@app.callback(Output('updated-date', 'children'),
+              [Input('interval-component', 'n_intervals')])
+def update_time (n):
+    summer_start_date = datetime(2020, 6, 25, 12, 00, 00)
+    days_till_summer = summer_start_date - datetime.now()
+    return str(days_till_summer).split('.')[0]
 
 if __name__ == "__main__":
     app.run_server()
