@@ -35,7 +35,7 @@ body = dbc.Container(
                         html.H2("Special Thanks"),
                         html.P(
                             """\
-This project was inspired by some very smart boys, Otto and Burt.
+This project was inspired by some very smart friends, Otto and Bert.
 Thank you for the insperation and if you have more ideas that you
 would like to see here, you know where to find me :)\n \n Adam
 
@@ -68,7 +68,7 @@ app.layout = html.Div([navbar, body,
 @app.callback(Output('updated-date', 'children'),
               [Input('interval-component', 'n_intervals')])
 def update_time (n):
-    summer_start_date = datetime(2020, 6, 25, 12, 00, 00)
+    summer_start_date = datetime(2020, 6, 19, 12, 00, 00)
     days_till_summer = summer_start_date - datetime.now()
     return str(days_till_summer).split('.')[0]
 
